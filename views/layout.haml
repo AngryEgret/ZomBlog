@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title= @title || Config.title
+    %script{:src => "/js/jquery-1.7.min.js", :type => "text/javascript"}
+    %link{:href => "/css/main.css", :rel => "stylesheet", }
+  %body
+    #header
+      #logo2
+        %h1
+          %a{:href => "/"}= Config.title
+        %p
+          by #{Config.author}
+    #content
+      = yield
+    #footer
+      %p#legal
+        Content by #{Config.author} |
+        Design adapted from
+        %a{:href => "http://www.freecsstemplates.org/preview/replenish"} Replenish

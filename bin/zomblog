@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+#
+#
+
+APPLICATION_PATH = File.expand_path(File.join(File.dirname(__FILE__), ".."));
+
+require 'rubygems'
+require "#{APPLICATION_PATH}/lib/zombiecms"
+require 'mixlib/cli'
+
+class ZombieCMSCLI
+  include Mixlib::CLI
+  
+  option :port,
+   :short => "-P PORT",
+   :long => "--port PORT",
+   :description => "The port to run on, default 4567",
+   :default => 4567
+
+  option :credentials,
+    :short => "-c USERNAME,PASSWORD",
+    :long => "--credentials USERNAME,PASSWORD",
+    :description => "Credentials used for protected actions.",
+    :default => "admin,admin",
+    :required => true
+end
+
+cli = ZombieCMSCLI.new
+cli.parse_options
+
+ZombieCMS.credentials = [ cli.config[:credentials].split(',')[0], cli.config[:credentials].split(',')[1] ]
+ZombieCMS.configure
+
+ZombieCMS.run! :host => 'localhost', :port => cli.config[:port] 
