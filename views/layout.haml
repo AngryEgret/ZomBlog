@@ -3,6 +3,7 @@
   %head
     %title= @title || Config.title
     %script{:src => "/js/jquery-1.7.min.js", :type => "text/javascript"}
+    %link{:href => "http://fonts.googleapis.com/css?family=Arvo", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/css/main.css", :rel => "stylesheet", }
   %body
     #header
@@ -15,6 +16,5 @@
       = yield
     #footer
       %p#legal
-        Content by #{Config.author} |
-        Design adapted from
-        %a{:href => "http://www.freecsstemplates.org/preview/replenish"} Replenish
+        Content by #{Config.author} :: Design adapted from
+        %a{:href => "http://www.freecsstemplates.org/preview/darkera/"} Darkera
