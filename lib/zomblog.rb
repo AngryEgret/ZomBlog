@@ -40,11 +40,18 @@ class ZomBlog < Sinatra::Base
     def partial(page, options={})
       haml page.to_sym, options.merge!(:layout => false)
     end
+    
+    def fix_dns
+      if Config.dns_array.include?(request.host)
+        return Config.dns_array[request.host]
+      end
+    end
   end
 
   ### Public
 
   get '/' do
+    @stick_title = fix_dns || nil
 	  posts = Post.reverse_order(:created_at).limit(10)
 	  haml :index, :locals => { :posts => posts }, :layout => false
   end

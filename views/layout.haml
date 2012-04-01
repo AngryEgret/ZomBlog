@@ -1,69 +1,11 @@
-!!!
-%html
-  %head
-    %title= @title || Config.title
-    %script{:src => "/js/jquery-1.7.min.js", :type => "text/javascript"}
-    %link{:href => "http://fonts.googleapis.com/css?family=Arvo", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "/css/style.css", :rel => "stylesheet", }
-  %body
-    #wrapper
-      #header-wrapper
-        #header
-          #logo
-            %h1
-              %a{:href => "/"}= Config.title
-            %p
-              by #{Config.author}
-      / end #header
-      #menu
-        %ul
-          %li.current_page_item
-            %a{:href => "/"} Homepage
-          %li
-            %a{:href => "/past/tags/Blog"} Blog
-          %li
-            %a{:href => "/past/tags/Brewing"} Brewing
-          %li
-            %a{:href => "/past/tags/Bikes"} Bikes
-          %li
-            %a{:href => "past/2012/4/1/about/"} About
-      / end #menu
-      #page
-        #page-bgtop
-          #page-bgbtm
-            #content
-              = yield
-            / end #content
-            #sidebar
-              %ul
-                %li
-                  %h2 Aliquam tempus
-                  %p Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper consectetuer hendrerit.
-                %li
-                  %h2 Categories
-                  %ul
-                    %li
-                      %a{:href => "#"} Aliquam libero
-                    %li
-                      %a{:href => "#"} Consectetuer adipiscing elit
-                %li
-                  %h2 Blogroll
-                  %ul
-                    %li
-                      %a{:href => "#"} Aliquam libero
-                    %li
-                      %a{:href => "#"} Consectetuer adipiscing elit
-                %li
-                  %h2 Archives
-                  %ul
-                    %li
-                      %a{:href => "#"} Aliquam libero
-                    %li
-                      %a{:href => "#"} Consectetuer adipiscing elit
-            / end #sidebar
-          %div{:style => "clear: both;"}  
-      / end #page
-    #footer
-      %p#legal
-        Content by #{Config.author} :: Design adapted from
-        %a{:href => "http://www.freecsstemplates.org/preview/darkera/"} Darkera
+= partial("header")
+#page
+  #page-bgtop
+    #page-bgbtm
+      #content
+        = yield
+      / end #content
+      = partial("sidebar")
+    %div{:style => "clear: both;"}  
+/ end #page
+= partial("footer")

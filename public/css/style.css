@@ -194,8 +194,8 @@ img.aligncenter {
 	border: none;
 }
 
-#menu .current_page_item li {
-	background: url(images/img03.jpg) repeat-x left top;
+#menu .current_page_item a {
+	background: url(/images/img03.jpg) repeat-x left top;
 	color: #FFFFFF;
 }
 

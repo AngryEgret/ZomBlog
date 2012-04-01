@@ -1,128 +1,55 @@
-!!!
-%html
-  %head
-    %title= @title || Config.title
-    %script{:src => "/js/jquery-1.7.min.js", :type => "text/javascript"}
-    %link{:href => "http://fonts.googleapis.com/css?family=Arvo", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "/css/style.css", :rel => "stylesheet", }
-  %body
-    #wrapper
-      #header-wrapper
-        #header
-          #logo
-            %h1
-              %a{:href => "/"}= Config.title
-            %p
-              by #{Config.author}
-      / end #header
-      #menu
-        %ul
-          %li.current_page_item
-            %a{:href => "/"} Homepage
-          %li
-            %a{:href => "/past/tags/Blog"} Blog
-          %li
-            %a{:href => "/past/tags/Brewing"} Brewing
-          %li
-            %a{:href => "/past/tags/Bikes"} Bikes
-          %li
-            %a{:href => "past/2012/4/1/about/"} About
-      / end #menu
-      #page
-        #page-bgtop
-          #page-bgbtm
-            #content
-              - posts.each do |post|
-                .post
-                  %p.date
-                    = post[:created_at].strftime("%b")
-                    %b= post[:created_at].strftime("%d")
-                  %h2.title
-                    %a{:href => post.url}= post[:title]
-                  %p.meta
-                    %small
-                      = post.linked_tags
-                      - if Config.disqus_shortname
-                        |
-                        %a{:href => "#{post.url}#disqus_thread"} comments
-                  .entry
-                    = post.summary_html
-                    - if post.more?
-                      %a{:href => post.url} Continue reading »
-              - if posts.empty?
-                %h2
-                  %p Looks like this is a fresh install of Scanty.
-                  %p
-                    %a{:href => "/auth"}> Log in
-                    , then
-                    = succeed "." do
-                      %a{:href => "/posts/new"} create a post
-              - else
-                #older_posts
-                  %a{:href => "/past"} Archive
-                - if admin?
-                  #new_post
-                    %a{:href => "/posts/new"} New post
+= partial("header")
+#page
+  #page-bgtop
+    #page-bgbtm
+      #content
+        - posts.each do |post|
+          .post
+            %p.date
+              = post[:created_at].strftime("%b")
+              %b= post[:created_at].strftime("%d")
+            %h2.title
+              %a{:href => post.url}= post[:title]
+            %p.meta
+              %small
+                = post.linked_tags
                 - if Config.disqus_shortname
-                  :javascript
-                    //<[CDATA[
-                    (function() {
-                      var links = document.getElementsByTagName('a');
-                      var query = '?';
-                      for(var i = 0; i < links.length; i++) {
-                        if(links[i].href.indexOf('#disqus_thread') >= 0) {
-                          query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
-                        }
-                      }
-                      document.write('</' + 'script>');
-                      })();
-                    //]]>
-            / end #content
-            #sidebar
-              %ul
-                %li
-                  %h2
-                    %a{:href => "https://twitter.com/#!/rgreget", :rel => "author", :style => "text-decoration:none;"}
-                      %img{:alt => "", :src => "/images/twitter-2.png"}/
-                    %a{:href => "https://plus.google.com/105586417904312833492?prsrc=3", :rel => "author", :style => "text-decoration:none;"}
-                      %img{:alt => "", :src => "https://ssl.gstatic.com/images/icons/gplus-32.png"}/
-                    %a{:href => "http://www.facebook.com/rgreget", :rel => "author", :style => "text-decoration:none;"}
-                      %img{:alt => "", :src => "/images/facebook.png"}/
-                    %a{:href => "http://www.linkedin.com/pub/ryan-greget/9/1a6/9a9", :rel => "author", :style => "text-decoration:none;"}
-                      %img{:alt => "", :src => "/images/linkedin.png"}/
-                    %a{:href => "/feed", :rel => "author", :style => "text-decoration:none;"}
-                      %img{:alt => "", :src => "/images/rss.png"}/
-                %li
-                  %h2 Search
-                  #cse{:style => "width: 100%;"} Loading
-                  %script{:src => "http://www.google.com/jsapi", :type => "text/javascript"}
-                  :javascript
-                    google.load('search', '1', {language : 'en', style : google.loader.themes.MINIMALIST});
-                    google.setOnLoadCallback(function() {
-                      var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
-                        '012783288460260137237:efwxagutkr0', customSearchOptions);
-                      customSearchControl.setResultSetSize(google.search.Search.SMALL_RESULTSET);
-                      customSearchControl.draw('cse');
-                    }, true);
-                %li
-                  %h2 Tags
-                  %ul
-                    %li
-                      %a{:href => "#"} Aliquam libero
-                    %li
-                      %a{:href => "#"} Consectetuer adipiscing elit
-                %li
-                  %h2 Blogroll
-                  %ul
-                    %li
-                      %a{:href => "#"} Aliquam libero
-                    %li
-                      %a{:href => "#"} Consectetuer adipiscing elit
-            / end #sidebar
-          %div{:style => "clear: both;"}  
-      / end #page
-    #footer
-      %p#legal
-        Content by #{Config.author} :: Design adapted from
-        %a{:href => "http://www.freecsstemplates.org/preview/darkera/"} Darkera
-    / end #footer
+                  |
+                  %a{:href => "#{post.url}#disqus_thread"} comments
+            .entry
+              = post.summary_html
+              - if post.more?
+                %a{:href => post.url} Continue reading »
+        - if posts.empty?
+          %h2
+            %p Looks like this is a fresh install of Scanty.
+            %p
+              %a{:href => "/auth"}> Log in
+              , then
+              = succeed "." do
+                %a{:href => "/posts/new"} create a post
+        - else
+          #older_posts
+            %a{:href => "/past"} Archive
+          - if admin?
+            #new_post
+              %a{:href => "/posts/new"} New post
+          - if Config.disqus_shortname
+            :javascript
+              //<[CDATA[
+              (function() {
+                var links = document.getElementsByTagName('a');
+                var query = '?';
+                for(var i = 0; i < links.length; i++) {
+                  if(links[i].href.indexOf('#disqus_thread') >= 0) {
+                    query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+                  }
+                }
+                document.write('</' + 'script>');
+                })();
+              //]]>
+      / end #content
+      = partial("sidebar")
+    %div{:style => "clear: both;"}  
+/ end #page
+= partial("footer")
