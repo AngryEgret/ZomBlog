@@ -61,8 +61,8 @@
                 #older_posts
                   %a{:href => "/past"} Archive
                 - if admin?
-                #new_post
-                  <a href="/posts/new"">New post
+                  #new_post
+                    <a href="/posts/new"">New post
                 - if Config.disqus_shortname
                   :javascript
                     //<[CDATA[
@@ -76,7 +76,7 @@
                       }
                       document.write('</' + 'script>');
                       })();
-                      //]]>
+                    //]]>
             / end #content
             #sidebar
               %ul
