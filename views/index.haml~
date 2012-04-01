@@ -1,0 +1,114 @@
+!!!
+%html
+  %head
+    %title= @title :: Config.title
+    %script{:src => "/js/jquery-1.7.min.js", :type => "text/javascript"}
+    %link{:href => "http://fonts.googleapis.com/css?family=Arvo", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "/css/style.css", :rel => "stylesheet", }
+  %body
+    #wrapper
+      #header-wrapper
+        #header
+          #logo
+            %h1
+              %a{:href => "/"}= Config.title
+            %p
+              by #{Config.author}
+      / end #header
+      #menu
+        %ul
+          %li.current_page_item
+            %a{:href => "#"} Homepage
+          %li
+            %a{:href => "#"} Blog
+          %li
+            %a{:href => "#"} Brewing
+          %li
+            %a{:href => "#"} Bikes
+          %li
+            %a{:href => "#"} About
+      / end #menu
+      #page
+        #page-bgtop
+          #page-bgbtm
+            #content
+              - posts.each do |post|
+                .post
+                  %p.date
+                    = post[:created_at].strftime("%b")
+                    %b= post[:created_at].strftime("%d")
+                  %h2.title
+                    %a{:href => post.url}= post[:title]
+                  %p.meta
+                    %small
+                      = post.linked_tags
+                      - if Config.disqus_shortname
+                        |
+                        %a{:href => "#{post.url}#disqus_thread"} comments
+                  .entry
+                    = post.summary_html
+                    - if post.more?
+                      %a{:href => post.url} Continue reading »
+              - if posts.empty?
+                %h2
+                  %p Looks like this is a fresh install of Scanty.
+                  %p
+                    %a{:href => "/auth"}> Log in
+                    , then
+                    = succeed "." do
+                      %a{:href => "/posts/new"} create a post
+              - else
+                #older_posts
+                  %a{:href => "/past"} Archive
+                - if admin?
+                  #new_post
+                    <a href="/posts/new"">New post
+                - if Config.disqus_shortname
+                  :javascript
+                    //<[CDATA[
+                    (function() {
+                      var links = document.getElementsByTagName('a');
+                      var query = '?';
+                      for(var i = 0; i < links.length; i++) {
+                        if(links[i].href.indexOf('#disqus_thread') >= 0) {
+                          query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+                        }
+                      }
+                      document.write('</' + 'script>');
+                      })();
+                    //]]>
+            / end #content
+            #sidebar
+              %ul
+                %li
+                  %h2 Aliquam tempus
+                  %p Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper consectetuer hendrerit.
+                %li
+                  %h2 Categories
+                  %ul
+                    %li
+                      %a{:href => "#"} Aliquam libero
+                    %li
+                      %a{:href => "#"} Consectetuer adipiscing elit
+                %li
+                  %h2 Blogroll
+                  %ul
+                    %li
+                      %a{:href => "#"} Aliquam libero
+                    %li
+                      %a{:href => "#"} Consectetuer adipiscing elit
+                %li
+                  %h2 Archives
+                  %ul
+                    %li
+                      %a{:href => "#"} Aliquam libero
+                    %li
+                      %a{:href => "#"} Consectetuer adipiscing elit
+            / end #sidebar
+          %div{:style => "clear: both;"}  
+      / end #page
+    #footer
+      %p#legal
+        Content by #{Config.author} :: Design adapted from
+        %a{:href => "http://www.freecsstemplates.org/preview/darkera/"} Darkera
+    / end #footer
