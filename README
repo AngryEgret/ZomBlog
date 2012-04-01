@@ -1,0 +1,18 @@
+= ZomBlog
+
+ZomBlog is a blogging app based heavily on Scanty (https://github.com/adamwiggins/scanty).  Several changes, updates and additions have been made.
+
+
+== Usage
+
+This service can be run as a standalone, single threaded application using a command line interface, or with thin using a rackup file.
+
+=== Standalone CLI
+<em>Great for single user testing and quick runs.</em>
+
+<tt>./bin/zomblog -p <port> -c <username,password></tt>
+
+=== Thin / Rackup 
+<em>Great for multi-threaded long term running.  Especially in an nginx/thin stack with mulitple thin processes</em>
+
+<tt>thin start -R ./config.ru</tt>
