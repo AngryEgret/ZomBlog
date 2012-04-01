@@ -20,7 +20,7 @@ class Post < Sequel::Model
   end
 
   def full_url
-	  Blog.url_base.gsub(/\/$/, '') + url
+	  Config.url_base.gsub(/\/$/, '') + url
   end
 
   def body_html

@@ -16,6 +16,7 @@ class ZomBlog < Sinatra::Base
       set :views, "#{APPLICATION_PATH}/views"
       set :haml, { :format => :html5 }
       set :static, true
+      set :sessions, true
       set :environment, ENV['RACK_ENV']
       set :public_directory, "#{APPLICATION_PATH}/public"
       set :root, APPLICATION_PATH
@@ -89,7 +90,7 @@ class ZomBlog < Sinatra::Base
   end
 
   post '/auth' do
-	  set_cookie(Blog.admin_cookie_key, Blog.admin_cookie_value) if params[:password] == Blog.admin_password
+	  response.set_cookie(Config.admin_cookie_key, :value => Config.admin_cookie_value) if params[:password] == Config.admin_password
 	  redirect '/'
   end
 
