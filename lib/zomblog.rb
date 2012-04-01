@@ -42,8 +42,8 @@ class ZomBlog < Sinatra::Base
     end
     
     def fix_dns
-      if Config.dns_array.include?(request.host)
-        return Config.dns_array[request.host]
+      if Config.dns_hash.include?("#{request.host}")
+        return Config.dns_hash[request.host]
       end
     end
   end
@@ -51,7 +51,6 @@ class ZomBlog < Sinatra::Base
   ### Public
 
   get '/' do
-    @stick_title = fix_dns || nil
 	  posts = Post.reverse_order(:created_at).limit(10)
 	  haml :index, :locals => { :posts => posts }, :layout => false
   end

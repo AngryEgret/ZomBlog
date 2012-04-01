@@ -12,7 +12,7 @@ Config = OpenStruct.new(
 	:admin_cookie_key => 'scanty_admin',
 	:admin_cookie_value => '51d6d976913ace58',
 	:disqus_shortname => 'zombie-inferno',
-	:dns_array => ['zombie-inferno.com' => 'Zombie Inferno', 'ottom8.com' => 'OttoM8', 'six60six.com' => 'six60six']
+	:dns_hash => {"zombie-inferno.com" => 'Zombie Inferno', "ottom8.com" => 'OttoM8', "six60six.com" => 'six60six'}
 )
 
 ZomBlog.configure

@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title= @title || Config.title
+    %title= @title || fix_dns || Config.title
     %script{:src => "/js/jquery-1.7.min.js", :type => "text/javascript"}
     %link{:href => "http://fonts.googleapis.com/css?family=Arvo", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/css/style.css", :rel => "stylesheet", }
@@ -11,7 +11,7 @@
         #header
           #logo
             %h1
-              %a{:href => "/"}= @stick_title || Config.title
+              %a{:href => "/"}= fix_dns || Config.title
             %p
               #{Config.author}
       / end #header
@@ -26,5 +26,5 @@
           %li
             %a{:href => "/past/tags/Bikes"} Bikes
           %li
-            %a{:href => "past/2012/4/1/about/"} About
+            %a{:href => "/past/2012/4/1/about/"} About
       / end #menu
