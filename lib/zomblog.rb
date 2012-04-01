@@ -4,7 +4,7 @@ require 'haml'
 require 'syntax/convertors/html'
 require 'maruku'
 
-class ZombieCMS < Sinatra::Base
+class ZomBlog < Sinatra::Base
       set :static, true
       set :public_directory, "#{APPLICATION_PATH}/public"
   class << self
@@ -22,7 +22,7 @@ class ZombieCMS < Sinatra::Base
 
     	Sequel.connect('sqlite://blog.db')
 
-      require "#{APPLICATION_PATH}/lib/zombiecms-control"
+      require "#{APPLICATION_PATH}/lib/zomblog-control"
       require "#{APPLICATION_PATH}/lib/post"
     end
   end

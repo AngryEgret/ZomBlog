@@ -5,10 +5,10 @@
 APPLICATION_PATH = File.expand_path(File.join(File.dirname(__FILE__), ".."));
 
 require 'rubygems'
-require "#{APPLICATION_PATH}/lib/zombiecms"
+require "#{APPLICATION_PATH}/lib/zomblog"
 require 'mixlib/cli'
 
-class ZombieCMSCLI
+class ZomBlogCLI
   include Mixlib::CLI
   
   option :port,
@@ -25,10 +25,10 @@ class ZombieCMSCLI
     :required => true
 end
 
-cli = ZombieCMSCLI.new
+cli = ZomBlogCLI.new
 cli.parse_options
 
-ZombieCMS.credentials = [ cli.config[:credentials].split(',')[0], cli.config[:credentials].split(',')[1] ]
-ZombieCMS.configure
+ZomBlog.credentials = [ cli.config[:credentials].split(',')[0], cli.config[:credentials].split(',')[1] ]
+ZomBlog.configure
 
-ZombieCMS.run! :host => 'localhost', :port => cli.config[:port] 
+ZomBlog.run! :host => 'localhost', :port => cli.config[:port] 

@@ -2,7 +2,7 @@ APPLICATION_PATH = File.expand_path(File.join(File.dirname(__FILE__), "."));
 
 require 'rubygems'
 require 'ostruct'
-require "#{APPLICATION_PATH}/lib/zombiecms"
+require "#{APPLICATION_PATH}/lib/zomblog"
 
 Config = OpenStruct.new(
 	:title => 'a scanty blog',
@@ -14,6 +14,6 @@ Config = OpenStruct.new(
 	:disqus_shortname => 'zombie-inferno'
 )
 
-ZombieCMS.configure
+ZomBlog.configure
 
-run ZombieCMS.new
+run ZomBlog.new
