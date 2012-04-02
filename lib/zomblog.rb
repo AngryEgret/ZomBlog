@@ -46,20 +46,22 @@ class ZomBlog < Sinatra::Base
         return Config.dns_hash[request.host]
       end
     end
+    
+    def cache_for(time)
+      response.headers['Cache-Control'] = "public, max-age=#{time.to_i}"
+    end
   end
 
-  before do
-    response.headers['Cache-Control'] = 'public, max-age=300'
-  end
-  
   ### Public
 
   get '/' do
+    cache_for 60
 	  posts = Post.reverse_order(:created_at).limit(10)
 	  haml :index, :locals => { :posts => posts }, :layout => false
   end
 
   get '/past/:year/:month/:day/:slug/' do
+    cache_for 60*60
 	  post = Post.filter(:slug => params[:slug]).first
 	  stop [ 404, "Page not found" ] unless post
 	  @title = post.title
@@ -71,12 +73,14 @@ class ZomBlog < Sinatra::Base
   end
 
   get '/past' do
+    cache_for 60
 	  posts = Post.reverse_order(:created_at)
 	  @title = "Archive"
 	  haml :archive, :locals => { :posts => posts }
   end
 
   get '/past/tags/:tag' do
+    cache_for 60
 	  tag = params[:tag]
 	  posts = Post.filter(:tags.like("%#{tag}%")).reverse_order(:created_at).limit(30)
 	  @title = "Posts tagged #{tag}"
@@ -88,6 +92,7 @@ class ZomBlog < Sinatra::Base
   end
 
   get '/feed' do
+    cache_for 60*60
 	  @posts = Post.reverse_order(:created_at).limit(20)
 	  content_type 'application/atom+xml', :charset => 'utf-8'
 	  builder :feed
