@@ -48,6 +48,10 @@ class ZomBlog < Sinatra::Base
     end
   end
 
+  before do
+    response.headers['Cache-Control'] = 'public, max-age=300'
+  end
+  
   ### Public
 
   get '/' do
@@ -96,20 +100,24 @@ class ZomBlog < Sinatra::Base
   ### Admin
 
   get '/auth' do
+    response.headers['Cache-Control'] = 'no-cache'
 	  haml :auth
   end
 
   post '/auth' do
+    response.headers['Cache-Control'] = 'no-cache'
 	  response.set_cookie(Config.admin_cookie_key, :value => Config.admin_cookie_value) if params[:password] == Config.admin_password
 	  redirect '/'
   end
 
   get '/posts/new' do
+    response.headers['Cache-Control'] = 'no-cache'
 	  auth
 	  haml :edit, :locals => { :post => Post.new, :url => '/posts' }
   end
 
   post '/posts' do
+    response.headers['Cache-Control'] = 'no-cache'
 	  auth
 	  post = Post.new :title => params[:title], :tags => params[:tags], :body => params[:body], :created_at => Time.now, :slug => Post.make_slug(params[:title])
 	  post.save
@@ -117,6 +125,7 @@ class ZomBlog < Sinatra::Base
   end
 
   get '/past/:year/:month/:day/:slug/edit' do
+    response.headers['Cache-Control'] = 'no-cache'
 	  auth
 	  post = Post.filter(:slug => params[:slug]).first
 	  stop [ 404, "Page not found" ] unless post
@@ -124,6 +133,7 @@ class ZomBlog < Sinatra::Base
   end
 
   post '/past/:year/:month/:day/:slug/' do
+    response.headers['Cache-Control'] = 'no-cache'
 	  auth
 	  post = Post.filter(:slug => params[:slug]).first
 	  stop [ 404, "Page not found" ] unless post
