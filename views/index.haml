@@ -5,9 +5,9 @@
       #content
         - posts.each do |post|
           .post
-            %p.date
-              = post[:created_at].strftime("%b")
-              %b= post[:created_at].strftime("%d")
+            %span.date
+              %span.month= post[:created_at].strftime("%b")
+              %span.day= post[:created_at].strftime("%d")
             %h2.title
               %a{:href => post.url}= post[:title]
             %p.meta
