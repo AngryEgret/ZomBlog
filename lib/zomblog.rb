@@ -78,6 +78,10 @@ class ZomBlog < Sinatra::Base
 	  @title = "Posts tagged #{tag}"
 	  haml :tagged, :locals => { :posts => posts, :tag => tag }
   end
+  
+  get '/about' do
+    redirect Config.about_page, 301
+  end
 
   get '/feed' do
 	  @posts = Post.reverse_order(:created_at).limit(20)
