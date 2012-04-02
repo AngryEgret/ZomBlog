@@ -334,6 +334,10 @@ img.aligncenter {
 	text-decoration: underline;
 }
 
+#sidebar .center {
+  text-align: center;
+}
+
 /* Calendar */
 
 #calendar {
