@@ -16,7 +16,6 @@ class ZomBlog < Sinatra::Base
       set :views, "#{APPLICATION_PATH}/views"
       set :haml, { :format => :html5 }
       set :static, true
-      set :sessions, true
       set :environment, ENV['RACK_ENV']
       set :public_directory, "#{APPLICATION_PATH}/public"
       set :root, APPLICATION_PATH
