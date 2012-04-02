@@ -4,7 +4,7 @@
     %small
       = post.linked_tags
       ||
-      = post.created_at
+      = post.created_at.strftime("%D")
   .entry
     = post.body_html
   - if admin?
