@@ -1,8 +1,10 @@
 .postzoom
   %h2.title= post.title
   %p.meta
-    %small= post.linked_tags
-  %p.meta= post.created_at
+    %small
+      = post.linked_tags
+      ||
+      = post.created_at
   .entry
     = post.body_html
   - if admin?
