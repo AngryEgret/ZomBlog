@@ -125,7 +125,8 @@ img.aligncenter {
 /* Menu */
 
 #menu {
-	width: 940px;
+/*	width: 940px; */
+  width: 50%;
 	height: 76px;
 	margin: 0px auto;
 	padding: 20px 20px 0px 20px;
