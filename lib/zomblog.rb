@@ -33,7 +33,7 @@ class ZomBlog < Sinatra::Base
 	  end
 
 	  def auth
-		  stop [ 401, 'Not authorized' ] unless admin?
+		  halt [ 401, 'Not authorized' ] unless admin?
 	  end
 
     def partial(page, options={})
