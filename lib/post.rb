@@ -54,7 +54,7 @@ class Post < Sequel::Model
   ########
 
   def to_html(markdown)
-	  Maruku.new(markdown).to_html_document
+  	RDiscount.new(markdown, :smart, :filter_html).to_html
   end
 
   def split_content(string)

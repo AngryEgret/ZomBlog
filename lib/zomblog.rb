@@ -1,8 +1,7 @@
 require 'sinatra/base'
 require 'sequel'
 require 'haml'
-require 'syntax/convertors/html'
-require 'maruku'
+require 'rdiscount'
 
 class ZomBlog < Sinatra::Base
       set :static, true
