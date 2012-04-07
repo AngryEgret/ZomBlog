@@ -1,8 +1,7 @@
 require 'sinatra/base'
 require 'sequel'
 require 'haml'
-require 'syntax/convertors/html'
-require 'maruku'
+require 'rdiscount'
 
 class ZomBlog < Sinatra::Base
       set :static, true
@@ -33,7 +32,7 @@ class ZomBlog < Sinatra::Base
 	  end
 
 	  def auth
-		  stop [ 401, 'Not authorized' ] unless admin?
+		  halt [ 401, 'Not authorized' ] unless admin?
 	  end
 
     def partial(page, options={})

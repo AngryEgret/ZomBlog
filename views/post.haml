@@ -6,7 +6,7 @@
       ||
       = post.created_at.strftime("%D")
   .entry
-    = post.body_html
+    ~ post.body_html
   - if admin?
     .edit
       %a{:href => "#{post.url}edit"} edit
