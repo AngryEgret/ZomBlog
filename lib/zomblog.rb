@@ -57,7 +57,7 @@ class ZomBlog < Sinatra::Base
     if !admin?
       cache_for 60
     end
-	  posts = Post.reverse_order(:created_at).limit(10)
+	  posts = Post.reverse_order(:created_at).limit(5)
 	  haml :index, :locals => { :posts => posts }, :layout => false
   end
 
