@@ -42,6 +42,35 @@
             customSearchControl.draw('cse');
           }, true);
     %li
+      %h2 Twitter
+      %script{:charset => "utf-8", :src => "http://widgets.twimg.com/j/2/widget.js"}
+      :javascript
+        new TWTR.Widget({
+          version: 2,
+          type: 'profile',
+          rpp: 3,
+          interval: 30000,
+          width: 'auto',
+          height: 300,
+          theme: {
+            shell: {
+              background: '#333333',
+              color: '#ffffff'
+            },
+            tweets: {
+              background: '#ffffff',
+              color: '#000000',
+              links: '#6e7a8a'
+            }
+          },
+          features: {
+            scrollbar: false,
+            loop: false,
+            live: false,
+            behavior: 'all'
+          }
+        }).render().setUser('rgreget').start();
+    %li
       %h2 Find Me
       .center
         %a{:href => "mailto:rgreget@gmail.com?Subject=Hello"}
